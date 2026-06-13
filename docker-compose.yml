@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  mrif:
+    build: .
+    image: mrif:latest
+    container_name: mrif-core
+    environment:
+      - MRIF_CORE_ID=CORE_001
+      - MRIF_LOG_LEVEL=INFO
+      - MRIF_DB_URL=sqlite:////data/mrif.db
+      - MRIF_AUDIT_ENABLED=true
+      - MRIF_MAX_FORKS=10
+    volumes:
+      - mrif_data:/data
+    command: ["status"]
+    restart: unless-stopped
+
+  mrif-dev:
+    build: .
+    image: mrif:latest
+    container_name: mrif-dev
+    environment:
+      - MRIF_CORE_ID=CORE_DEV
+      - MRIF_LOG_LEVEL=DEBUG
+      - MRIF_DB_URL=sqlite:////data/mrif_dev.db
+    volumes:
+      - mrif_data:/data
+      - ./src:/app/src:ro
+    command: ["--help"]
+    profiles:
+      - dev
+
+volumes:
+  mrif_data:
+    driver: local

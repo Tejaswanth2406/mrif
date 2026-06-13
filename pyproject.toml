@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mrif"
+version = "0.1.0"
+description = "Meta-Recursive Intelligence Framework — a production-grade recursive meta-intelligence OS"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "MRIF Team"}]
+keywords = ["ai", "meta-intelligence", "recursive", "framework", "intelligence-os"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "networkx>=3.2.0",
+    "loguru>=0.7.2",
+    "rich>=13.7.0",
+    "typer>=0.9.0",
+    "sqlalchemy>=2.0.0",
+    "numpy>=1.26.0",
+    "python-dotenv>=1.0.0",
+    "PyYAML>=6.0.0",
+    "orjson>=3.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.7.0",
+    "types-PyYAML>=6.0.0",
+]
+
+[project.scripts]
+mrif = "mrif.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=src/mrif --cov-report=term-missing -v"
+
+[tool.coverage.run]
+source = ["src/mrif"]
+omit = ["*/tests/*", "*/cli.py"]
