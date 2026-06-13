@@ -1,3 +1,4 @@
+<img width="1983" height="793" alt="image" src="https://github.com/user-attachments/assets/4828fac1-13e0-4df8-a62e-48832932d6d1" />
 # Meta-Recursive Intelligence Framework (MRIF)
 
 > *A production-grade implementation of recursive meta-intelligence architecture.*
